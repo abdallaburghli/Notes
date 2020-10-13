@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if 'edit' in request.path %}
+  <form action="{% url 'editNote' note.id %}" , method='POST'>
+{% else %}
+  <form action="{% url 'addnote' %}" , method='POST'>
+{% endif %}
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="Text">Type you text here</label>
+      <input type="text" name="note" value="{{ note.text }}" required>
+      
+      <input type="hidden" name="owner" value="{{ user.id }}">
+    </div>
+
+    <input type="submit" value="done" class="btn btn-secondary btn-block">
+  </form>
+
+{% endblock %}
